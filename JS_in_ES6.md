@@ -1,6 +1,8 @@
 # Javascript ES6  
 #### [let vs const](#let-vs-const)
-#### arrows function
+#### [arrows function](#arrow-function)
+
+------
 
 ### let vs const  
 * `const` value can't be overwritten  
