@@ -5,6 +5,9 @@
 #### [Template literals](#template-literals)
 #### [strings](#strings)
 #### [Destructuring Objects](#destructuring-objects)
+#### [Using for of loop with array](#using-for-of-loop-with-array)
+#### [Using for in loop with object](#using-for-in-loop-with-object)
+#### [Array methods](array-methods)
 ------
 
 ### let vs const  
@@ -300,3 +303,80 @@ total({ b: 5, a: 2 }) // 7
 //default obj set to {}, will look for default value
 total() //3
 ```
+
+### Using for of loop with array
+* ES6 `for...of` loop  
+```js
+const names = ["a", "b", "c"];
+
+for (const name of names) {
+  console.log(name);
+  if (name === "a") {
+    continue;
+  }
+}
+```
+
+#### Using for in loop with object  
+* `for...in` support both ES5 and ES6  
+* create const as key and iterate object  
+```js
+const person = {
+  name: "john",
+  age: 22
+};
+
+for (const info in person) {
+  const value = person[info];
+  console.log(info, value)
+} 
+```
+
+### Array methods  
+* `Array.from(arrayLike)` apply array-like object to true array; mostly use when need array prototype properties  
+```js
+const lists = document.querySelectorAll('li'); //nodeLists of li
+const listsArray = Array.from(lists); //listsArray becomes Array and has all Array prototype
+
+//Array.from takes a function as second arg which can use to specify the return value of array obj  
+const innerTexts = Array.from(lists, ele => {
+  console.log(ele); //ele is the DOM; eg <li>text<li>
+  return ele.textContent; //returns each DOM innerText in array 
+});
+```
+
+* `Array.of(arg)` creates array from the passed in argument  
+```js
+const newArray = Array.of(1,2,3,4,5); //[1,2,3,4,5];
+```
+
+* `Array.find(function)` iterates each element and return the first matched element if function returns true  
+
+* `Array.findIndex(function)` iterates each element and return the first matched element index if function returns true    
+```js
+const json = [
+  {
+    name: "john",
+    age: 22
+  },
+  {
+    name: "sam",
+    age: 28
+  }
+];
+
+//{name: "sam", age: 28}
+json.find(element => {
+  return element.name === "sam"
+});
+
+//one liner
+json.find(element => element.name === "sam");
+
+//1
+json.findIndex(element => element.name === "sam");
+```
+
+>> `Array.find` returns the first element, `Array.filter` returns array  
+
+* `Array.some()`  
