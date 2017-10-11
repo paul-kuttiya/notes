@@ -7,7 +7,8 @@
 #### [Destructuring Objects](#destructuring-objects)
 #### [Using for of loop with array](#using-for-of-loop-with-array)
 #### [Using for in loop with object](#using-for-in-loop-with-object)
-#### [Array methods](array-methods)
+#### [Array methods](#array-methods)
+#### [Array spread](#array-spread)
 ------
 
 ### let vs const  
@@ -379,4 +380,19 @@ json.findIndex(element => element.name === "sam");
 
 >> `Array.find` returns the first element, `Array.filter` returns array  
 
-* `Array.some()`  
+* Array spread can combine multiple arrays and value into single array  
+* Array spread can also split strings into array of individual string
+```js
+const a1 = ["a", "b", "c"];
+const a2 = ["d", "e"];
+
+const bigArray = [...a1, "add", ...a2]; // ["a", "b", "c", "add", "d", "e"];
+const AnotherBigArray = [..."add"]; // ["a", "d", "d"]
+
+//create a copy array rather than mutate from the original array by reference
+var copyArr = [].concat(bigArray); //ES5
+var copyArr = [...bigArray]; //ES6
+
+//create new array with slice
+const newArr = [...a1.slice(0, 1), ...a1.slice(2)]; //["a", "c"]
+```
