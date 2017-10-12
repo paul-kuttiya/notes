@@ -9,6 +9,10 @@
 #### [Using for in loop with object](#using-for-in-loop-with-object)
 #### [Array methods](#array-methods)
 #### [Array spread](#array-spread)
+#### [Array rest param](#array-rest-param)
+#### [Object literal](#object-literal)
+#### [Modules](#modules)
+#### [Prototypal Inheritance](#prototypal-inheritance)
 ------
 
 ### let vs const  
@@ -380,19 +384,157 @@ json.findIndex(element => element.name === "sam");
 
 >> `Array.find` returns the first element, `Array.filter` returns array  
 
-* Array spread can combine multiple arrays and value into single array  
-* Array spread can also split strings into array of individual string
+### Array spread
+
+* combine multiple arrays and value into single array  
+* split strings into array of individual string  
+* pass in as argument for each element  
 ```js
 const a1 = ["a", "b", "c"];
 const a2 = ["d", "e"];
 
 const bigArray = [...a1, "add", ...a2]; // ["a", "b", "c", "add", "d", "e"];
-const AnotherBigArray = [..."add"]; // ["a", "d", "d"]
+const AnotherArray = [..."add"]; // ["a", "d", "d"]
 
 //create a copy array rather than mutate from the original array by reference
 var copyArr = [].concat(bigArray); //ES5
-var copyArr = [...bigArray]; //ES6
+let copyArr = [...bigArray]; //ES6
 
 //create new array with slice
 const newArr = [...a1.slice(0, 1), ...a1.slice(2)]; //["a", "c"]
+
+//pass in as argument
+a1.push(...a2); // ["a", "b", "c", "d", "e"];
+
+someThing(...a2); // someThing("d", "e")
+
+function someThing(a, b) {
+  console.log(a, b);
+}
+```
+
+### Array rest param  
+* convert the rest of arguments to array in function  
+* destructuring into new variable and the rest into array    
+```js
+//convert rest of args to array  
+getLetters("a", "b", "c", "d", "e"); //"a" "b" ["c", "d", "e"]
+
+function getLetters(a, b, ...letters) {
+  console.log(a, b, letters);
+}
+
+//destructuring array into new variable  
+const arr = ["a", "b", "c", "d"];
+
+const [a, b, ...letters] = arr ; //const a = "a", const b = "b", const letters = ["c", "d"]
+```
+
+### Object literal  
+* drop `key:value` when create object to single variable if `key:value` has the same name  
+* drop function syntax when create object function properties  
+```js
+//create object  
+const first = "John",
+      last = "Doe";
+
+const person = { first, last } // person = { first: first, last: last }
+
+//new ES6 syntax for object function properties
+const cat = {
+  //ES5 sleep: function() { ... }
+  sleep() {
+    //...
+  },
+  bite(param) {
+    //...
+  }
+}
+
+//create key value using string as key name  
+const key = "abc";
+
+const newObj = {
+  [key]: "22", // abc: "22"
+  //dynamicly create new key inside obj
+  [`${key}de`]: "33" // abcde: "33"
+}
+```
+
+### Modules  
+* import and export js as module  
+* export default will export and can be renamed in other module; can export default only 1 per file module  
+```js
+// file1.js
+const someCode = {
+  //...
+};
+
+export default someCode;
+```
+```js
+// file2.js
+// import from export default can be renamed directly 
+import newConst from './file1'; // const newConst is someCode obj
+
+// file3.js
+// import dependencies don't need path
+import React from 'react';
+```
+
+* export named variables and function will strictly export as named only; can be multiple per module    
+```js
+// file1.js
+export const someCode = {
+  //...
+};
+
+export const anotherCode = {
+  //...
+};
+
+export default function User() {
+  //...
+}
+
+export function functionExport() {
+  //...
+}
+```
+```js
+// file2.js
+// import User from export default in file1.js
+// import someCode, anotherCode, functionExport from file1.js
+import User, { someCode, anotherCode, functionExport } from './file1';
+
+// file3.js
+// import and rename need as to rename to new variable
+import { someCode as newCode } from './file1';
+``` 
+
+### Prototypal Inheritance  
+* ES5 prototype  
+```js
+// create constructor function to create instance properties
+// object created from function constructor will have its own property 
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+// add function methods to constructor function using prototype
+// all object created from the same function constructor will inherit all methods from function constructors prototype
+Person.prototype.talk = function() {
+  //...
+}
+
+//this.name === "John";
+//this.age === 22;
+//John.talk === Person.prototype.talk;
+const John = new Person("John", 22);
+```
+
+* ES6 class  
+```js
+
 ```
