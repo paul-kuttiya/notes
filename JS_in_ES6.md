@@ -534,7 +534,64 @@ Person.prototype.talk = function() {
 const John = new Person("John", 22);
 ```
 
-* ES6 class  
+* ES6 class and inheritance  
 ```js
+//define class decoration  
+class Person {
+  //initializer
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  //instance method
+  talk() {
+    //...
+  }
+  //class method
+  static walk() {
+    //...
+  }
+  //getter
+  get profile() {
+    return `${this.name} ${this.age}`;
+  }
+  //setter
+  set city(city) {
+    this.city = city;
+  }
+}
 
+//class inheritance  
+class Male extends Person {
+  constructor(name, age, height) {
+    //call super from parent class to get context('this' point to Person), pass in argument needed for parent class
+    super(name, age)
+    this.height = height
+  }
+}
+
+//people have its own instance properties name and age, and have Person function methods
+const people = new Person("John", 22);
+
+//johny will inherit all Person properties, and have its own instance properties name, age and height
+const johny = new Male("Johny", 22, 6.1);
+```
+
+```js
+// Example create new class by extending Array class
+// Array(element1, element2, ...)
+class CollectionArr extends Array {
+  //use rest operator to get the rest of arg
+  constructor(string, ...items) {
+    //class Array needs elements as arguments
+    super(...items);
+    this.string = string;
+  }
+  someMethod() {
+    //...
+  }
+}
+
+// costomArr = [{..}, {..}], this.string = "string"; 
+const customArr = new CollectionArr("string", { name: "john", age: 22 }, { name: "sam", age: 26 })
 ```
