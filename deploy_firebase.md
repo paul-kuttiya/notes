@@ -1,4 +1,4 @@
-### single page app production deploy with firebase  
+### single page app production deploy with firebase   
 * use webpack config template  
 
 * include in `webpack`  
