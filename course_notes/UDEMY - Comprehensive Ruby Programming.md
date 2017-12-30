@@ -9,7 +9,7 @@
 [regex](#regex)  
 [gem dish](#gem-dish)  
 [metaprogramming](#metaprogramming)  
-[working with api][#working-with-api]  
+[working with api](#working-with-api)  
 
 
 ## puts and p  
